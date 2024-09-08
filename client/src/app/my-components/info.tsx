@@ -3,13 +3,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Info() {
   return (
-    <div className="border-r-2 h-[100%] flex flex-row justify-start">
-      {/* <div className="p-5 flex flex-row">
-        {" "}
-        <Profile />
-        <h4>Welcome back, Luan Nguyen</h4>
-      </div> */}
-    </div>
+    <section className="border-r-2 h-[100%] flex flex-row justify-start">
+      <div className="p-5 flex flex-row">
+        <div className="flex flex-row items-center gap-2">
+          {" "}
+          <Profile />
+          <h4 className="text-2xl font-semibold">Welcome back!</h4>
+        </div>
+      </div>
+    </section>
   );
 }
 
