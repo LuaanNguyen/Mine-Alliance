@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "./components/theme-provider";
+import { ThemeProvider } from "./my-components/theme-provider";
 import "./globals.css";
+import Navigation from "./my-components/navigation";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <Navigation />
           {children}
         </ThemeProvider>
       </body>
