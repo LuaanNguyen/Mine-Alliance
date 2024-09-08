@@ -40,7 +40,7 @@ export default function Navigation() {
   }
 
   return (
-    <nav className="w-[100%] flex justify-between border-b-2">
+    <nav className="w-[100%] flex justify-between border-b-4">
       <div className="flex gap-2 p-2 items-center">
         <Pickaxe size={44} strokeWidth={1.75} />
         <h1 className="text-2xl font-semibold">Sustainability</h1>
