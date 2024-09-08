@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button, Search } from "@/components/ui/button";
-import { Pickaxe, Factory } from "lucide-react";
+import { Pickaxe, Factory, Locate, Navigation } from "lucide-react";
 
 export default function Info() {
   return (
@@ -49,7 +49,7 @@ function ListOfMines() {
       ></input>
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
-          <h1 className="text-3xl font-semibold">12</h1>
+          <h1 className="text-3xl font-semibold">3</h1>
           <h4>Total</h4>
         </div>
         <div className="flex-row">
@@ -61,14 +61,41 @@ function ListOfMines() {
           <h4>Resolved</h4>
         </div>
       </div>
-      <div className="flex flex-row gap-2 items-center border-2 py-6 px-2 rounded-xl">
-        <Factory size={28} color="#fda668" />
-        <div>
-          {" "}
-          <h1 className="text-xl font-semibold">Morenci Mine</h1>
-          <p className="text-gray-400"></p>
+      <section className="flex flex-col gap-2">
+        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
+          <Factory size={28} color="#fda668" />
+          <div>
+            {" "}
+            <h1 className="text-xl font-semibold">Morenci Mine</h1>
+            <p className="text-gray-400">Freeport-McMoRan</p>
+          </div>
+          <div>
+            <Navigation size={28} color="#000000" />
+          </div>
         </div>
-      </div>
+        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
+          <Factory size={28} color="#fda668" />
+          <div>
+            {" "}
+            <h1 className="text-xl font-semibold">Bagdad Mine</h1>
+            <p className="text-gray-400">Freeport-McMoRan</p>
+          </div>
+          <div>
+            <Navigation size={28} color="#000000" />
+          </div>
+        </div>
+        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
+          <Factory size={28} color="#fda668" />
+          <div>
+            {" "}
+            <h1 className="text-xl font-semibold">Ray Mine</h1>
+            <p className="text-gray-400">Asarco</p>
+          </div>
+          <div>
+            <Navigation size={28} color="#000000" />
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
