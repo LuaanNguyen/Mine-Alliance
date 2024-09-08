@@ -18,7 +18,7 @@ function Profile() {
   return (
     <div className="flex flex-col">
       {" "}
-      <div className="flex items-center gap-5 my-5">
+      <div className="flex items-center gap-5 my-1">
         <Avatar>
           <AvatarImage src="https://github.com/LuaanNguyen.png" />
           <AvatarFallback>Luan Nguyen</AvatarFallback>
@@ -62,7 +62,7 @@ function ListOfMines() {
         </div>
       </div>
       <section className="flex flex-col gap-2">
-        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
+        <div className="flex flex-row gap-2 items-center border-2 py-5 px-4 rounded-xl justify-between">
           <Factory size={28} color="#fda668" />
           <div>
             {" "}
