@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "./my-components/theme-provider";
 import "./globals.css";
 import Navigation from "./my-components/navigation";
+import {
+  House,
+  CircleHelp,
+  CircleAlert,
+  Minus,
+  Share2,
+  Settings,
+} from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -35,9 +43,14 @@ export default function RootLayout({
 
 function Sidebar() {
   return (
-    <aside className="bg-gray-100 p-4 border-r-4 w-[60px]">
+    <aside className=" p-4 border-r-4 w-[60px] flex flex-col gap-5">
       {/* Sidebar content goes here */}
-      <p>Sidebar</p>
+      <House color="#fda668" />
+      <Minus />
+      <CircleHelp />
+      <CircleAlert />
+      <Share2 />
+      <Settings />
     </aside>
   );
 }
