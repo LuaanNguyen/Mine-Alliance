@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button, Search } from "@/components/ui/button";
-import { Pickaxe, Factory, Locate, Navigation } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Factory, Navigation } from "lucide-react";
 
 export default function Info() {
   return (
