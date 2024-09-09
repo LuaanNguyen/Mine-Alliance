@@ -7,7 +7,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False)
     user_type = db.Column(db.String(50), nullable=False)  # Mining, Regulator, Community
-    company_locations = relationship('MiningLocation', backref='company', lazy=True)  # For mining company users
+    company_locations = relationship('MiningLocation', backref='company', lazy=True, foreign_keys='MiningLocation.company_id')  # Specify the foreign key for mining company
     job_count = db.Column(db.Integer, default=0)  # This will aggregate job counts for the mining company
     nearest_location_id = db.Column(db.Integer, db.ForeignKey('mining_location.id'))  # For community members
     nearest_location = relationship('MiningLocation', foreign_keys=[nearest_location_id])  # Community member's nearest mining location
