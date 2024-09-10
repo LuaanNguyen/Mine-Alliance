@@ -2,4 +2,5 @@ flask
 flask_cors
 flask_sqlalchemy
 flask-migrate
-openai
+openai==0.28
+python-dotenv

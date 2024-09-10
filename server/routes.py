@@ -3,6 +3,10 @@ from flask import Blueprint, jsonify, request
 from models import db, User, MiningLocation
 from openai import ChatCompletion
 import os
+from dotenv import load_dotenv
+
+# Load the .env file
+load_dotenv()
 
 # Blueprint for the assessment routes
 assessment_bp = Blueprint('assessment_bp', __name__)
