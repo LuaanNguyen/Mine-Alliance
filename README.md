@@ -217,22 +217,25 @@ GET /mining_locations?id=1
 }
 ```
 
+
 ## Database Schema
+
 The `MiningLocation` model represents mining locations, with the following fields:
 
--`id`: Integer, Primary Key
--`location`: String, the name of the mining location
--`type_of_mining`: String, the type of mining (e.g., gold, coal, iron)
--`tenure`: Integer, how long the mining has been active
--`affect_radius`: Float, the radius affected by the mining
--`impact_scale`: Float, a GPT-generated impact scale (1-10)
--`water_quality`: Float, water quality score
--`air_quality`: Float, air quality score
--`soil_quality`: Float, soil quality score
--`biodiversity`: Text, biodiversity impact description
--`socioeconomic_index`: Text, socioeconomic description
--`job_count_index`: Integer, number of jobs created by the mining
--`description`: Text, description of the mining site
--`cycle_status`: String, status of the mining site (e.g., operational, closed)
--`assessment`: Text, GPT-generated environmental assessment
--`location_coords`: String, coordinates of the location (latitude, longitude)
+- `id`: Integer, Primary Key  
+- `location`: String, the name of the mining location  
+- `type_of_mining`: String, the type of mining (e.g., gold, coal, iron)  
+- `tenure`: Integer, how long the mining has been active  
+- `affect_radius`: Float, the radius affected by the mining  
+- `impact_scale`: Float, a GPT-generated impact scale (1-10)  
+- `water_quality`: Float, water quality score  
+- `air_quality`: Float, air quality score  
+- `soil_quality`: Float, soil quality score  
+- `biodiversity`: Text, biodiversity impact description  
+- `socioeconomic_index`: Text, socioeconomic description  
+- `job_count_index`: Integer, number of jobs created by the mining  
+- `description`: Text, description of the mining site  
+- `cycle_status`: String, status of the mining site (e.g., operational, closed)  
+- `assessment`: Text, GPT-generated environmental assessment  
+- `location_coords`: String, coordinates of the location (latitude, longitude)  
+
