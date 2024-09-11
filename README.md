@@ -49,32 +49,27 @@ The assessments provide:
 
 1. **Clone the repository:**
     ```bash
-        git clone https://github.com/yourusername/your-repo.git
-        cd your-repo
-    ```
+      git clone https://github.com/yourusername/your-repo.git
+      cd your-repo
 
 ### Create Virtual environment (Optional)
     ```bash
         python3 -m venv venv
         source venv/bin/activate  # For Windows use `venv\Scripts\activate`
-    ```
 
 ### Install dependencies
     ```bash
         pip install -r requirements.txt
-    ```
 
 ### Run the application
     ```bash
         flask run
-    ```
 
 ### Create Database if needed
     ```bash
         flask db init
         flask db migrate
         flask db upgrade
-    ```
 
 ### Environment Variables
 
