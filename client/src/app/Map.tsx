@@ -17,7 +17,7 @@ export default function Map() {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png"
+          url={`https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png?api_key=${process.env.STADIA_MAPS_API_KEY}`}
         />
         <Marker position={[33.0551, -109.0645]}>
           <Popup>Morenci Mine</Popup>
