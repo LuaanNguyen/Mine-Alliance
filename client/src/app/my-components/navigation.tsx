@@ -21,7 +21,6 @@ export default function Navigation() {
   const [time, setTime] = useState(getTime());
   const [position, setPosition] = React.useState("Community");
   const { theme, setTheme } = useTheme();
-  console.log(theme);
 
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
