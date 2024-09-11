@@ -1,3 +1,5 @@
+"use client";
+
 import { MapContainer, Marker, TileLayer, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
