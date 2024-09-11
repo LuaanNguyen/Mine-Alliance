@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 app = Flask(__name__)
 app.config.from_object(Config)
 
-migrate = Migrate(app, db)    # Initialize Flask-Migrate
+migrate = Migrate(app, db)
 
 db.init_app(app)
 CORS(app)
@@ -24,5 +24,5 @@ def home():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Create database tables if they don't exist
+        db.create_all()  
     app.run(debug=True)
