@@ -6,8 +6,6 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 
 export default function Map() {
-  // const { position, zoom } = props;
-
   return (
     <section className="grid col-span-2 h-[100%]">
       <MapContainer

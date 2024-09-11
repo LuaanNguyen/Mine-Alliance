@@ -2,6 +2,7 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Factory, Navigation } from "lucide-react";
+import { useGeneral } from "@/context/generalContext";
 
 export default function Info() {
   return (
@@ -39,6 +40,8 @@ function Profile() {
 }
 
 function ListOfMines() {
+  const { mine } = useGeneral();
+
   return (
     <div className="flex flex-col">
       <h1 className="text-xl font-semibold">Nearby Active Mines</h1>

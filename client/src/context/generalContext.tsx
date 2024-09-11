@@ -51,9 +51,9 @@ function GeneralProvider({ children }: GeneralProviderProps) {
       try {
         const res = await fetch(`${serverURL}/mining_locations`);
         const data = await res.json();
-        console.log(data);
+        setMine(data);
       } catch {
-        console.log("There was an error fetching data.");
+        throw new Error("There was an error fetching data.");
       }
     }
     fetchData();

@@ -11,21 +11,6 @@ import Info from "./my-components/info";
 import { GeneralProvider } from "@/context/generalContext";
 
 export default function Home() {
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch("http://127.0.0.1:5000/");
-  //       const data = await response.json();
-  //       // Handle the data here
-  //       console.log(data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   return (
     <>
       <GeneralProvider>
