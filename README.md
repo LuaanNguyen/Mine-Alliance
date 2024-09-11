@@ -53,30 +53,30 @@ The assessments provide:
   cd your-repo
   ```
 
-### Create Virtual environment (Optional)
-    ```
-    python3 -m venv venv
-    source venv/bin/activate  # For Windows use `venv\Scripts\activate`
-    ```
+2. **Create Virtual environment (Optional)**
 
-### Install dependencies
-    ```
-    pip install -r requirements.txt
-    ```
+  python3 -m venv venv
+  source venv/bin/activate  # For Windows use `venv\Scripts\activate`
 
-### Run the application
-    ```
-    flask run
-    ```
 
-### Create Database if needed
-    ```
-    flask db init
-    flask db migrate
-    flask db upgrade
-    ```
+3. **Install dependencies**
 
-### Environment Variables
+  pip install -r requirements.txt
+
+
+4. **Run the application**
+  
+  flask run
+
+
+5. **Create Database if needed**
+
+  flask db init
+  flask db migrate
+  flask db upgrade
+
+
+6. **Environment Variables**
 
 **Create a ```.env``` file in the root directory with the following content.**
 
