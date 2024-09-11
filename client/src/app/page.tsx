@@ -8,6 +8,7 @@ const Map = dynamic(() => import("./Map"), {
   ),
 });
 import Info from "./my-components/info";
+import { GeneralProvider } from "@/context/generalContext";
 
 export default function Home() {
   // useEffect(() => {
@@ -27,13 +28,15 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex">
-        <main className="grid grid-cols-4 h-[100vh] overflow-hidden flex-grow">
-          <Info />
-          <Map />
-          <div className="border-l-2 h-[100%]">4</div>
-        </main>
-      </div>
+      <GeneralProvider>
+        <div className="flex">
+          <main className="grid grid-cols-4 h-[100vh] overflow-hidden flex-grow">
+            <Info />
+            <Map />
+            <div className="border-l-2 h-[100%]">4</div>
+          </main>
+        </div>
+      </GeneralProvider>
     </>
   );
 }
