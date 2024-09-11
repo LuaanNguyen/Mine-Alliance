@@ -7,7 +7,7 @@ import {
   useEffect,
 } from "react";
 
-interface Mine {
+interface MineState {
   affect_radius: number;
   air_quality: number;
   assessment: string;
@@ -24,43 +24,39 @@ interface Mine {
   water_quality: number;
 }
 
-interface MineState {
-  mines: Mine[];
-}
-
 interface GeneralContextType {
-  mine: MineState;
-  setMine: React.Dispatch<React.SetStateAction<MineState>>;
+  mineData: MineState[];
+  setMineData: React.Dispatch<React.SetStateAction<MineState[]>>;
 }
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
 
 const serverURL = "http://127.0.0.1:5000"; // This is a development URL, change as the VPS
 
-const initialState: MineState = { mines: [] };
+const initialState: MineState[] = [];
 
 interface GeneralProviderProps {
   children: ReactNode;
 }
 
 function GeneralProvider({ children }: GeneralProviderProps) {
-  const [mine, setMine] = useState<MineState>(initialState);
+  const [mineData, setMineData] = useState<MineState[]>(initialState);
 
   useEffect(() => {
     async function fetchData() {
       try {
         const res = await fetch(`${serverURL}/mining_locations`);
-        const data = await res.json();
-        setMine(data);
-      } catch {
-        throw new Error("There was an error fetching data.");
+        const fetchedData = await res.json();
+        setMineData(fetchedData);
+      } catch (error) {
+        console.error("There was an error fetching data:", error);
       }
     }
     fetchData();
   }, []);
 
   return (
-    <GeneralContext.Provider value={{ mine, setMine }}>
+    <GeneralContext.Provider value={{ mineData, setMineData }}>
       {children}
     </GeneralContext.Provider>
   );

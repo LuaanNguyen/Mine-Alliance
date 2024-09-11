@@ -40,7 +40,7 @@ function Profile() {
 }
 
 function ListOfMines() {
-  const { mine } = useGeneral();
+  const { mineData } = useGeneral();
 
   return (
     <div className="flex flex-col">
@@ -65,39 +65,22 @@ function ListOfMines() {
         </div>
       </div>
       <section className="flex flex-col gap-2">
-        <div className="flex flex-row gap-2 items-center border-2 py-5 px-4 rounded-xl justify-between">
-          <Factory size={28} color="#fda668" />
-          <div>
-            {" "}
-            <h1 className="text-xl font-semibold">Morenci Mine</h1>
-            <p className="text-gray-400">Freeport-McMoRan</p>
+        {mineData.map((el) => (
+          <div
+            className="flex flex-row gap-2 items-center border-2 py-5 px-4 rounded-xl justify-between"
+            key={el.id}
+          >
+            <Factory size={28} color="#fda668" />
+            <div>
+              {" "}
+              <h1 className="text-xl font-semibold">{el.location}</h1>
+              <p className="text-gray-400">{el.type_of_mining}</p>
+            </div>
+            <div>
+              <Navigation size={28} color="#000000" />
+            </div>
           </div>
-          <div>
-            <Navigation size={28} color="#000000" />
-          </div>
-        </div>
-        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
-          <Factory size={28} color="#fda668" />
-          <div>
-            {" "}
-            <h1 className="text-xl font-semibold">Bagdad Mine</h1>
-            <p className="text-gray-400">Freeport-McMoRan</p>
-          </div>
-          <div>
-            <Navigation size={28} color="#000000" />
-          </div>
-        </div>
-        <div className="flex flex-row gap-2 items-center border-2 py-6 px-4 rounded-xl justify-between">
-          <Factory size={28} color="#fda668" />
-          <div>
-            {" "}
-            <h1 className="text-xl font-semibold">Ray Mine</h1>
-            <p className="text-gray-400">Asarco</p>
-          </div>
-          <div>
-            <Navigation size={28} color="#000000" />
-          </div>
-        </div>
+        ))}
       </section>
     </div>
   );
