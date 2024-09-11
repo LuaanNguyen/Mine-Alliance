@@ -1,131 +1,48 @@
 import openai
 from flask import Blueprint, jsonify, request
-from models import db, User, MiningLocation
-from openai import ChatCompletion
+from models import db, MiningLocation
 import os
 from dotenv import load_dotenv
 
 # Load the .env file
 load_dotenv()
 
-# Blueprint for the assessment routes
+# Blueprint for the assessment and chatbot routes
 assessment_bp = Blueprint('assessment_bp', __name__)
+chatbot_bp = Blueprint('chatbot_bp', __name__)
 
 # Initialize OpenAI API key
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
-# Endpoint to add a new user (Mining Company / Workers, Regulators, Community Members)
-@assessment_bp.route('/users', methods=['GET', 'POST'])
-def manage_users():
-    if request.method == 'POST':
-        data = request.json
-        user = User(username=data['username'], user_type=data['user_type'])
-        db.session.add(user)
-        db.session.commit()
-        return jsonify({"message": "User added"}), 201
-    elif request.method == 'GET':
-        users = User.query.all()
-        return jsonify([{"id": user.id, "username": user.username, "user_type": user.user_type} for user in users])
-
-
-# Endpoint to manage mining locations (both POST and GET requests)
-@assessment_bp.route('/mining_locations', methods=['POST', 'GET'])
-def manage_mining_locations():
-    if request.method == 'POST':
-        # Handle the POST request: Add a new mining location
-        data = request.json
-        mining_location = MiningLocation(
-            location=data.get('location'),
-            type_of_mining=data.get('type_of_mining'),
-            tenure=data.get('tenure'),
-            affect_radius=data.get('affect_radius'),
-            impact_scale=data.get('impact_scale'),
-            water_quality=data.get('water_quality'),
-            air_quality=data.get('air_quality'),
-            soil_quality=data.get('soil_quality'),
-            biodiversity=data.get('biodiversity'),
-            socioeconomic_index=data.get('socioeconomic_index'),
-            description=data.get('description')
-        )
-        db.session.add(mining_location)
-        db.session.commit()
-        return jsonify({"message": "Location added"}), 201
+# Helper function to validate mining location input
+def validate_location_data(data):
+    required_fields = ['location', 'type_of_mining', 'tenure', 'affect_radius', 
+                       'water_quality', 'air_quality', 'soil_quality', 
+                       'biodiversity', 'socioeconomic_index', 'description']
     
-    elif request.method == 'GET':
-        # Handle the GET request: Retrieve all mining locations
-        mining_locations = MiningLocation.query.all()
-        return jsonify([{
-            "id": location.id,
-            "location": location.location,
-            "type_of_mining": location.type_of_mining,
-            "tenure": location.tenure,
-            "affect_radius": location.affect_radius,
-            "impact_scale": location.impact_scale,
-            "water_quality": location.water_quality,
-            "air_quality": location.air_quality,
-            "soil_quality": location.soil_quality,
-            "biodiversity": location.biodiversity,
-            "socioeconomic_index": location.socioeconomic_index,
-            "description": location.description
-        } for location in mining_locations])
-
-
-@assessment_bp.route('/assessment', methods=['POST', 'GET'])
-def generate_assessment():
-    if request.method == 'POST':
-        # Handle the POST request: Generate the assessment for a specific mining location
-        location_id = request.json.get('location_id')
-        
-        # Fetch the mining location details from the database
-        mining_location = MiningLocation.query.get(location_id)
-        
-        if not mining_location:
-            return jsonify({"error": "Mining location not found"}), 404
-
-        # Generate prompt dynamically using the mining location data
-        gpt_prompt = generate_prompt(mining_location)
-        
-        # Get the GPT-generated assessment
-        assessment = get_gpt_assessment(gpt_prompt)
-        
-        # Save the assessment in the database
-        mining_location.assessment = assessment
-        db.session.commit()
-        
-        # Return the generated assessment in the response
-        return jsonify({"assessment": assessment})
+    missing_fields = [field for field in required_fields if not data.get(field)]
     
-    elif request.method == 'GET':
-        # Handle the GET request: Return all mining location details, including their assessments
-        mining_locations = MiningLocation.query.all()
-        return jsonify([{
-            "id": location.id,
-            "location": location.location,
-            "type_of_mining": location.type_of_mining,
-            "tenure": location.tenure,
-            "affect_radius": location.affect_radius,
-            "impact_scale": location.impact_scale,
-            "water_quality": location.water_quality,
-            "air_quality": location.air_quality,
-            "soil_quality": location.soil_quality,
-            "biodiversity": location.biodiversity,
-            "socioeconomic_index": location.socioeconomic_index,
-            "description": location.description,
-            "assessment": location.assessment  # Include the assessment in the response
-        } for location in mining_locations])
+    if missing_fields:
+        return {"error": f"Missing fields: {', '.join(missing_fields)}"}, 400
+    return None
 
+def get_mining_location(location_id=None, location_name=None, location_coords=None):
+    if location_id:
+        return db.session.get(MiningLocation, location_id)  # Use session.get() now
+    elif location_name:
+        return MiningLocation.query.filter_by(location=location_name).first()
+    elif location_coords:
+        return MiningLocation.query.filter_by(location_coords=location_coords).first()
+    return None
 
+# Helper function to generate GPT prompt based on mining location data
 def generate_prompt(mining_location):
-    """
-    Generate a prompt for GPT based on the mining location data.
-    """
     return f"""
     Conduct an environmental impact assessment for the mining location "{mining_location.location}" with the following details:
     
     - Type of Mining: {mining_location.type_of_mining}
     - Tenure: {mining_location.tenure} years
     - Affect Radius: {mining_location.affect_radius} km
-    - Impact Scale: {mining_location.impact_scale}
     - Water Quality: {mining_location.water_quality}
     - Air Quality: {mining_location.air_quality}
     - Soil Quality: {mining_location.soil_quality}
@@ -137,15 +54,11 @@ def generate_prompt(mining_location):
     2. Predicted impacts
     3. Mitigation strategies
     4. Recommendations for mining companies, community, and regulators.
+    5. Estimate an environmental impact scale between 1 and 10.
     """
 
+# Helper function to call GPT model and generate the assessment and impact scale
 def get_gpt_assessment(prompt):
-    """
-    Call the GPT model to generate the assessment based on the generated prompt, using the latest OpenAI API version.
-    """
-    # Set the API key directly for testing purposes (replace 'your_openai_api_key_here' with the actual key)
-    openai.api_key = os.getenv('OPENAI_API_KEY')
-    
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
@@ -153,7 +66,196 @@ def get_gpt_assessment(prompt):
             {"role": "user", "content": prompt}
         ]
     )
+    assessment_text = response['choices'][0]['message']['content']
     
-    # The correct structure for accessing the generated response in the latest OpenAI API
-    return response['choices'][0]['message']['content']
+    # Extract impact scale from the assessment
+    impact_scale = extract_impact_scale(assessment_text)
+    
+    return assessment_text, impact_scale
 
+# Helper function to extract impact scale from GPT assessment response
+def extract_impact_scale(assessment_text):
+    lines = assessment_text.split('\n')
+    for line in lines:
+        if "Impact Scale" in line and ":" in line:
+            try:
+                return float(line.split(":")[1].strip())
+            except (ValueError, IndexError):
+                return None  # Handle error gracefully
+    return None  # Default to None if no scale is found
+
+
+
+# Endpoint to manage mining locations (POST to add, GET to retrieve)
+@assessment_bp.route('/mining_locations', methods=['POST', 'GET'])
+def manage_mining_locations():
+    if request.method == 'POST':
+        # Handle the POST request: Add a new mining location
+        data = request.json
+        location_coords = data.get('location_coords')
+
+        # Validate input data
+        validation_error = validate_location_data(data)
+        if validation_error:
+            return jsonify(validation_error), 400
+
+        if not location_coords:
+            return jsonify({"error": "location_coords is required"}), 400
+
+        try:
+            mining_location = MiningLocation(
+                location=data.get('location'),
+                type_of_mining=data.get('type_of_mining'),
+                tenure=data.get('tenure'),
+                affect_radius=data.get('affect_radius'),
+                water_quality=data.get('water_quality'),
+                air_quality=data.get('air_quality'),
+                soil_quality=data.get('soil_quality'),
+                biodiversity=data.get('biodiversity'),
+                socioeconomic_index=data.get('socioeconomic_index'),
+                description=data.get('description'),
+                location_coords=location_coords
+            )
+
+            # Generate the GPT prompt and assessment
+            gpt_prompt = generate_prompt(mining_location)
+            assessment, impact_scale = get_gpt_assessment(gpt_prompt)
+
+            # Update mining location with assessment and impact scale
+            mining_location.assessment = assessment
+            mining_location.impact_scale = impact_scale
+
+            # Save to the database
+            db.session.add(mining_location)
+            db.session.commit()
+
+            return jsonify({
+                "message": "Location added successfully",
+                "assessment": assessment,
+                "impact_scale": impact_scale
+            }), 201
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"error": str(e)}), 500
+
+    elif request.method == 'GET':
+        # Fetch query parameters
+        location_id = request.args.get('id')
+        location_name = request.args.get('location')
+        location_coords = request.args.get('coords')
+
+        if location_id or location_name or location_coords:
+            mining_location = get_mining_location(location_id, location_name, location_coords)
+
+            if not mining_location:
+                return jsonify({"error": "Mining location not found."}), 404
+
+            # Check if the assessment and impact scale exist, if not, generate them
+            if not mining_location.assessment or not mining_location.impact_scale:
+                # Generate GPT prompt based on mining location
+                gpt_prompt = generate_prompt(mining_location)
+                # Get GPT-generated assessment and impact scale
+                assessment, impact_scale = get_gpt_assessment(gpt_prompt)
+
+                # Update mining location with assessment and impact scale
+                mining_location.assessment = assessment
+                mining_location.impact_scale = impact_scale
+                db.session.commit()
+
+            return jsonify({
+                "id": mining_location.id,
+                "location": mining_location.location,
+                "type_of_mining": mining_location.type_of_mining,
+                "tenure": mining_location.tenure,
+                "affect_radius": mining_location.affect_radius,
+                "impact_scale": mining_location.impact_scale,
+                "water_quality": mining_location.water_quality,
+                "air_quality": mining_location.air_quality,
+                "soil_quality": mining_location.soil_quality,
+                "biodiversity": mining_location.biodiversity,
+                "socioeconomic_index": mining_location.socioeconomic_index,
+                "description": mining_location.description,
+                "assessment": mining_location.assessment,
+                "location_coords": mining_location.location_coords
+            }), 200
+        else:
+            # No specific location requested, return all mining locations
+            all_mines = MiningLocation.query.all()
+            if not all_mines:
+                return jsonify({"message": "No mining locations found."}), 404
+            
+            result = [{
+                "id": mine.id,
+                "location": mine.location,
+                "type_of_mining": mine.type_of_mining,
+                "tenure": mine.tenure,
+                "affect_radius": mine.affect_radius,
+                "impact_scale": mine.impact_scale,
+                "water_quality": mine.water_quality,
+                "air_quality": mine.air_quality,
+                "soil_quality": mine.soil_quality,
+                "biodiversity": mine.biodiversity,
+                "socioeconomic_index": mine.socioeconomic_index,
+                "description": mine.description,
+                "location_coords": mine.location_coords,
+                "assessment": mine.assessment
+            } for mine in all_mines]
+
+            return jsonify(result), 200
+        
+# Helper function for generating assessment for a specific location
+def generate_assessment_for_location(location_id):
+    # Fetch the mining location from the database
+    mining_location = MiningLocation.query.get(location_id)
+    if not mining_location:
+        return {"error": "Mining location not found."}, 404
+
+    # Generate GPT prompt based on mining location
+    gpt_prompt = generate_prompt(mining_location)
+    
+    # Get GPT-generated assessment and impact scale
+    assessment, impact_scale = get_gpt_assessment(gpt_prompt)
+
+    # Update mining location with assessment and impact scale
+    mining_location.assessment = assessment
+    mining_location.impact_scale = impact_scale
+    db.session.commit()
+
+    return {"assessment": assessment, "impact_scale": impact_scale}, 200
+
+# Update your POST route to call this function
+@assessment_bp.route('/assessment', methods=['POST'])
+def generate_assessment():
+    location_id = request.json.get('location_id')
+    if not location_id:
+        return jsonify({"error": "No location_id provided."}), 400
+
+    result, status_code = generate_assessment_for_location(location_id)
+    return jsonify(result), status_code
+
+
+# Route for handling mining-related chatbot questions
+@chatbot_bp.route('/chatbot', methods=['POST'])
+def chatbot():
+    data = request.json
+    user_question = data.get('question')
+    
+    if not user_question:
+        return jsonify({"error": "No question provided."}), 400
+    
+    # Generate GPT prompt based on user question
+    gpt_prompt = f"Answer the following question related to mining: {user_question}"
+    
+    # Get the GPT response
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are an expert in mining and environmental impact."},
+            {"role": "user", "content": gpt_prompt}
+        ]
+    )
+    
+    answer = response['choices'][0]['message']['content']
+    
+    # Return the chatbot response
+    return jsonify({"response": answer}), 200
