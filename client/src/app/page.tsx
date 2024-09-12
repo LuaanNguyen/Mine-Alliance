@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <GeneralProvider>
         <div className="flex">
-          <main className="grid grid-cols-4 h-[100vh] overflow-hidden flex-grow">
+          <main className="grid grid-cols-4 h-[92vh] overflow-hidden flex-grow">
             <Info />
             <Map />
             <ChatBox mineId="mine123" />

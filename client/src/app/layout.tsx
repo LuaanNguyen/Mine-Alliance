@@ -3,6 +3,7 @@ import { ThemeProvider } from "./my-components/theme-provider";
 import "./globals.css";
 import Navigation from "./my-components/navigation";
 import Sidebar from "./my-components/sidebar";
+import Footer from "./my-components/footer";
 
 export const metadata: Metadata = {
   title: "Mine Alliance",
@@ -26,10 +27,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Sidebar />
-          <div className="w-[100%]">
+          <main className="w-[100%]">
             <Navigation />
             {children}
-          </div>
+            <Footer />
+          </main>
         </ThemeProvider>
       </body>
     </html>
