@@ -23,7 +23,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/chatbot", {
+      const response = await fetch("http://54.245.158.146:5000/chatbot", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +56,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
 
   return (
     <div className="flex flex-col  border-l-2 border-gray-200 justify-start p-3">
-      <div className="flex flex-col h-[400px] border-2 rounded-2xl">
+      <div className="flex flex-col h-[400px] border-2 rounded-2xl bg-gray-50">
         <div className="p-4 rounded-t-2xl">
           <h2 className="text-xl text-[#88D66C] font-semibold flex items-center gap-2">
             <Brain />{" "}
