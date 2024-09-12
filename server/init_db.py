@@ -8,59 +8,177 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
-    # Sample Mining Locations (without impact_scale)
     location1 = MiningLocation(
-        location="Southern Gold Mine",
-        type_of_mining="Gold",
-        tenure=15,
-        affect_radius=8.5,
-        water_quality=5.6,
-        air_quality=6.1,
-        soil_quality=5.4,
-        biodiversity="Moderate impact on local wildlife.",
-        socioeconomic_index="High development with 300+ workers.",
-        description="Southern Gold Mine has been in operation for 15 years with moderate environmental impact.",
-        job_count_index=150,
+        location="Morenci Mine",
+        type_of_mining="Copper",
+        tenure=85,
+        affect_radius=15.0,
+        water_quality=6.5,
+        air_quality=5.8,
+        soil_quality=6.0,
+        biodiversity="Minor impacts observed in surrounding flora.",
+        socioeconomic_index="Large employer with over 2,000 workers.",
+        description="Morenci Mine has been operational since 1939, producing copper with significant economic impact.",
+        job_count_index=2000,
         cycle_status="Operational",
-        location_coords="35.6895,139.6917"  # Coordinates in latitude, longitude format
+        location_coords="32.91185,-109.48397"
     )
 
     location2 = MiningLocation(
-        location="Western Iron Mine",
-        type_of_mining="Iron",
-        tenure=10,
-        affect_radius=10.0,
-        water_quality=6.3,
-        air_quality=6.5,
-        soil_quality=6.0,
-        biodiversity="Low impact on wildlife, but soil degradation present.",
-        socioeconomic_index="Moderate development with 200+ workers.",
-        description="Western Iron Mine has been in operation for 10 years with a focus on iron extraction.",
-        job_count_index=200,
+        location="Bagdad Mine",
+        type_of_mining="Copper",
+        tenure=60,
+        affect_radius=12.0,
+        water_quality=5.4,
+        air_quality=5.2,
+        soil_quality=6.1,
+        biodiversity="Low impact on local wildlife due to managed operations.",
+        socioeconomic_index="Employs around 700 workers.",
+        description="Bagdad Mine is a significant copper mine located in Yavapai County, contributing to local and state economies.",
+        job_count_index=700,
         cycle_status="Operational",
-        location_coords="40.7128,-74.0060"  # Coordinates in latitude, longitude format
+        location_coords="34.23227,-113.18574"
     )
 
     location3 = MiningLocation(
-        location="Northern Coal Mine",
-        type_of_mining="Coal",
+        location="Safford Mine",
+        type_of_mining="Copper",
+        tenure=15,
+        affect_radius=10.0,
+        water_quality=5.5,
+        air_quality=5.6,
+        soil_quality=5.7,
+        biodiversity="Moderate impact on local ecosystems.",
+        socioeconomic_index="Contributes significantly to the local economy with around 400 jobs.",
+        description="Safford Mine has been operational since 2007, with a focus on environmentally responsible mining practices.",
+        job_count_index=400,
+        cycle_status="Operational",
+        location_coords="32.75098,-109.45313"
+    )
+
+    location4 = MiningLocation(
+        location="Sierrita Mine",
+        type_of_mining="Copper",
+        tenure=30,
+        affect_radius=14.0,
+        water_quality=5.0,
+        air_quality=5.3,
+        soil_quality=5.9,
+        biodiversity="Moderate impact, ongoing rehabilitation measures in place.",
+        socioeconomic_index="Provides approximately 1,000 jobs in the region.",
+        description="Sierrita Mine is known for its large-scale copper production and its efforts in local community engagement.",
+        job_count_index=1000,
+        cycle_status="Operational",
+        location_coords="31.61109,-110.67549"
+    )
+
+    location5 = MiningLocation(
+        location="Miami Mine",
+        type_of_mining="Copper",
         tenure=20,
-        affect_radius=12.5,
-        water_quality=4.9,
+        affect_radius=9.0,
+        water_quality=5.8,
         air_quality=5.5,
-        soil_quality=5.0,
-        biodiversity="Significant impact on wildlife due to deforestation.",
-        socioeconomic_index="High development with 500+ workers.",
-        description="Northern Coal Mine has been in operation for 20 years with significant environmental impact.",
+        soil_quality=5.2,
+        biodiversity="Slight impact, with ongoing studies on local fauna.",
+        socioeconomic_index="Supports over 600 jobs in the area.",
+        description="Miami Mine has been an integral part of Arizona's copper mining industry with a long history and strong community ties.",
+        job_count_index=600,
+        cycle_status="Operational",
+        location_coords="33.40215,-110.93844"
+    )
+
+    location6 = MiningLocation(
+        location="Ray Mine",
+        type_of_mining="Copper",
+        tenure=50,
+        affect_radius=11.5,
+        water_quality=5.2,
+        air_quality=5.4,
+        soil_quality=5.6,
+        biodiversity="Moderate impact on desert ecosystem, mitigation efforts ongoing.",
+        socioeconomic_index="Major employer with approximately 800 workers.",
+        description="Ray Mine is one of Arizona's largest open-pit copper mines, utilizing advanced mining technologies.",
+        job_count_index=800,
+        cycle_status="Operational",
+        location_coords="33.15478,-110.97277"
+    )
+
+    location7 = MiningLocation(
+        location="Mission Mine",
+        type_of_mining="Copper",
+        tenure=40,
+        affect_radius=10.5,
+        water_quality=5.6,
+        air_quality=5.7,
+        soil_quality=5.5,
+        biodiversity="Managed impact with ongoing environmental monitoring programs.",
+        socioeconomic_index="Employs about 500 people from surrounding communities.",
+        description="Mission Mine is a significant copper producer, known for its community engagement initiatives.",
         job_count_index=500,
         cycle_status="Operational",
-        location_coords="51.5074,-0.1278"  # Coordinates in latitude, longitude format
+        location_coords="31.97888,-111.04944"
+    )
+
+    location8 = MiningLocation(
+        location="Pinto Valley Mine",
+        type_of_mining="Copper",
+        tenure=35,
+        affect_radius=9.5,
+        water_quality=5.9,
+        air_quality=6.0,
+        soil_quality=5.8,
+        biodiversity="Low to moderate impact, with active wildlife conservation programs.",
+        socioeconomic_index="Provides around 550 jobs in the Globe-Miami area.",
+        description="Pinto Valley Mine is a long-standing copper operation with a focus on sustainable mining practices.",
+        job_count_index=550,
+        cycle_status="Operational",
+        location_coords="33.39722,-110.96111"
+    )
+
+    location9 = MiningLocation(
+        location="Florence Copper Project",
+        type_of_mining="Copper",
+        tenure=5,
+        affect_radius=7.0,
+        water_quality=6.2,
+        air_quality=6.3,
+        soil_quality=6.1,
+        biodiversity="Minimal surface disturbance due to in-situ recovery method.",
+        socioeconomic_index="Expected to create about 170 direct jobs when fully operational.",
+        description="Florence Copper Project uses innovative in-situ copper recovery technology, minimizing environmental impact.",
+        job_count_index=170,
+        cycle_status="Operational",
+        location_coords="33.03083,-111.43028"
+    )
+
+    location10 = MiningLocation(
+        location="Resolution Copper Project",
+        type_of_mining="Copper",
+        tenure=0,
+        affect_radius=13.0,
+        water_quality=6.0,
+        air_quality=5.9,
+        soil_quality=5.7,
+        biodiversity="Potential significant impact, extensive environmental studies ongoing.",
+        socioeconomic_index="Projected to create about 1,400 direct jobs when operational.",
+        description="Resolution Copper Project is a proposed large-scale copper mine, currently in the permitting and development phase.",
+        job_count_index=1400,
+        cycle_status="Development",
+        location_coords="33.30194,-111.09722"
     )
 
     # Add mining locations to the session
     db.session.add(location1)
     db.session.add(location2)
     db.session.add(location3)
+    db.session.add(location4)
+    db.session.add(location5)
+    db.session.add(location6)
+    db.session.add(location7)
+    db.session.add(location8)
+    db.session.add(location9)
+    db.session.add(location10)
 
     # Commit changes to the database
     db.session.commit()

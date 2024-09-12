@@ -83,11 +83,11 @@ function ListOfMines() {
                         }`}
               onClick={() => toggleMineSelection(el.id)}
             >
-              <div className="flex flex-row items-center py-5 px-3 justify-between gap-1">
+              <div className="flex flex-row items-center py-5 px-3 justify-between gap-4">
                 <p className="text-gray-400">{el.id}</p>
                 <Factory size={28} color="#fda668" />
-                <div>
-                  <h1 className="text-xl font-semibold">{el.location}</h1>
+                <div className="grow text-center">
+                  <h1 className="text-lg font-semibold">{el.location}</h1>
                   <p className="text-gray-400">{el.type_of_mining}</p>
                 </div>
 
