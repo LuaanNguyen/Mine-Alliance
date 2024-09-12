@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Mine Alliance",
   description: "AZ Spark Challenge 2024",
   icons: {
-    icon: "/favicon.svg", // Use .svg extension
+    icon: "/pickaxe.svg", // Use .svg extension
   },
 };
 export default function RootLayout({
