@@ -6,8 +6,8 @@ import { useGeneral } from "@/context/generalContext";
 
 export default function Info() {
   return (
-    <section className="border-r-2 h-[100%] flex flex-col justify-start">
-      <div className="p-5 flex flex-col">
+    <section className="border-r-2 h-[100%] flex flex-col justify-start overflow-y-auto">
+      <div className="p-5 flex flex-col overflow-scroll">
         <Profile />
         <ListOfMines />
       </div>
@@ -33,7 +33,7 @@ function Profile() {
         <Button variant="outline">Submit a issue 📝</Button>
         <Button variant="outline">Vote 🗳️</Button>
       </div>
-      <hr className="h-[2px] bg-gray-200 my-4 w-[100%]"></hr>
+      <hr className="h-[2px] bg-gray-200 my-2 w-[100%]"></hr>
     </div>
   );
 }
@@ -48,11 +48,12 @@ function ListOfMines() {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-xl font-semibold">Nearby Active Mines</h1>
+      {" "}
+      <h1 className="text-xl font-semibold my-1">Nearby Active Mines</h1>
       <input
         type="text"
         placeholder={`Search...`}
-        className="p-3 border-2 border-gray-200 rounded-2xl my-2"
+        className="p-3 border-2 border-gray-200 rounded-2xl"
       />
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
@@ -68,12 +69,13 @@ function ListOfMines() {
           <h4>Resolved</h4>
         </div>
       </div>
-      <section className="flex flex-col gap-2">
+      <section className="flex flex-col gap-2 flex-1">
+        {" "}
         {mineData.length > 0 ? (
           mineData.map((el) => (
             <div
               key={el.id}
-              className={`flex flex-col border-2 rounded-xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer
+              className={`flex flex-col border-2 rounded-xl transition-all duration-300 ease-in-out cursor-pointer
                         ${
                           selectedMine === el.id
                             ? "ring-2 ring-[#6B8E23] shadow-lg"
@@ -96,7 +98,7 @@ function ListOfMines() {
                 )}
               </div>
               {selectedMine === el.id && (
-                <div className="bg-gray-50 p-4 border-t">
+                <div className="bg-gray-50 p-4 border-t text-sm">
                   <p>
                     <strong>Tenure:</strong> {el.tenure} years
                   </p>
