@@ -43,7 +43,7 @@ export default function Navigation() {
     <nav className="w-[100%] flex justify-between border-b-4">
       <div className="flex gap-2 p-2 items-center">
         <Pickaxe size={44} strokeWidth={1.75} />
-        <h1 className="text-2xl font-semibold">SustAIn</h1>
+        <h1 className="text-2xl font-semibold">Mine Alliance</h1>
       </div>
       <section className="flex gap-5 p-4 items-center">
         <div className="flex gap-1">
