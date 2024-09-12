@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
   loading: () => (
@@ -9,6 +10,7 @@ const Map = dynamic(() => import("./Map"), {
 });
 import Info from "./my-components/info";
 import { GeneralProvider } from "@/context/generalContext";
+import ChatBox from "./my-components/chatbox";
 
 export default function Home() {
   return (
@@ -18,7 +20,7 @@ export default function Home() {
           <main className="grid grid-cols-4 h-[100vh] overflow-hidden flex-grow">
             <Info />
             <Map />
-            <div className="border-l-2 h-[100%]">4</div>
+            <ChatBox mineId="mine123" />
           </main>
         </div>
       </GeneralProvider>

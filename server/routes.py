@@ -239,13 +239,14 @@ def generate_assessment():
 def chatbot():
     data = request.json
     user_question = data.get('question')
-    
+    mine_id = data.get('mineId')
+
     if not user_question:
         return jsonify({"error": "No question provided."}), 400
-    
-    # Generate GPT prompt based on user question
-    gpt_prompt = f"Answer the following question related to mining: {user_question}"
-    
+
+    # Generate GPT prompt based on user question and mine ID
+    gpt_prompt = f"Answer the following question about mining quality for mine {mine_id}: {user_question}"
+
     # Get the GPT response
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -254,8 +255,8 @@ def chatbot():
             {"role": "user", "content": gpt_prompt}
         ]
     )
-    
+
     answer = response['choices'][0]['message']['content']
-    
+
     # Return the chatbot response
     return jsonify({"response": answer}), 200
