@@ -5,10 +5,12 @@ import Navigation from "./my-components/navigation";
 import Sidebar from "./my-components/sidebar";
 
 export const metadata: Metadata = {
-  title: "SustAIn",
+  title: "Mine Alliance",
   description: "AZ Spark Challenge 2024",
+  icons: {
+    icon: "/favicon.svg", // Use .svg extension
+  },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

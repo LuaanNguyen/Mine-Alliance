@@ -69,61 +69,66 @@ function ListOfMines() {
         </div>
       </div>
       <section className="flex flex-col gap-2">
-        {mineData.map((el) => (
-          <div
-            key={el.id}
-            className={`flex flex-col border-2 rounded-xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer
+        {mineData.length > 0 ? (
+          mineData.map((el) => (
+            <div
+              key={el.id}
+              className={`flex flex-col border-2 rounded-xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer
                         ${
                           selectedMine === el.id
                             ? "ring-2 ring-[#6B8E23] shadow-lg"
                             : ""
                         }`}
-            onClick={() => toggleMineSelection(el.id)}
-          >
-            <div className="flex flex-row items-center py-5 px-3 justify-between gap-1">
-              <p className="text-gray-400">{el.id}</p>
-              <Factory size={28} color="#fda668" />
-              <div>
-                <h1 className="text-xl font-semibold">{el.location}</h1>
-                <p className="text-gray-400">{el.type_of_mining}</p>
-              </div>
+              onClick={() => toggleMineSelection(el.id)}
+            >
+              <div className="flex flex-row items-center py-5 px-3 justify-between gap-1">
+                <p className="text-gray-400">{el.id}</p>
+                <Factory size={28} color="#fda668" />
+                <div>
+                  <h1 className="text-xl font-semibold">{el.location}</h1>
+                  <p className="text-gray-400">{el.type_of_mining}</p>
+                </div>
 
-              {selectedMine === el.id ? (
-                <ChevronUp size={24} />
-              ) : (
-                <ChevronDown size={24} />
+                {selectedMine === el.id ? (
+                  <ChevronUp size={24} />
+                ) : (
+                  <ChevronDown size={24} />
+                )}
+              </div>
+              {selectedMine === el.id && (
+                <div className="bg-gray-50 p-4 border-t">
+                  <p>
+                    <strong>Tenure:</strong> {el.tenure} years
+                  </p>
+                  <p>
+                    <strong>Affect Radius:</strong> {el.affect_radius} km
+                  </p>
+                  <p>
+                    <strong>Water Quality:</strong> {el.water_quality}
+                  </p>
+                  <p>
+                    <strong>Air Quality:</strong> {el.air_quality}
+                  </p>
+                  <p>
+                    <strong>Soil Quality:</strong> {el.soil_quality}
+                  </p>
+                  <p>
+                    <strong>Biodiversity:</strong> {el.biodiversity}
+                  </p>
+                  <p>
+                    <strong>Socioeconomic Index:</strong>{" "}
+                    {el.socioeconomic_index}
+                  </p>
+                  <p>
+                    <strong>Description:</strong> {el.description}
+                  </p>
+                </div>
               )}
             </div>
-            {selectedMine === el.id && (
-              <div className="bg-gray-50 p-4 border-t">
-                <p>
-                  <strong>Tenure:</strong> {el.tenure} years
-                </p>
-                <p>
-                  <strong>Affect Radius:</strong> {el.affect_radius} km
-                </p>
-                <p>
-                  <strong>Water Quality:</strong> {el.water_quality}
-                </p>
-                <p>
-                  <strong>Air Quality:</strong> {el.air_quality}
-                </p>
-                <p>
-                  <strong>Soil Quality:</strong> {el.soil_quality}
-                </p>
-                <p>
-                  <strong>Biodiversity:</strong> {el.biodiversity}
-                </p>
-                <p>
-                  <strong>Socioeconomic Index:</strong> {el.socioeconomic_index}
-                </p>
-                <p>
-                  <strong>Description:</strong> {el.description}
-                </p>
-              </div>
-            )}
-          </div>
-        ))}
+          ))
+        ) : (
+          <div className="text-center text-2xl my-20">No Data Available 🥲</div>
+        )}
       </section>
     </div>
   );
