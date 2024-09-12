@@ -19,7 +19,7 @@ import {
 
 export default function Navigation() {
   const [time, setTime] = useState(getTime());
-  const [position, setPosition] = React.useState("Community");
+  const [position, setPosition] = React.useState("Community 👨‍👩‍👧‍👦");
   const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
@@ -69,25 +69,25 @@ export default function Navigation() {
               value={position}
               onValueChange={setPosition}
             >
-              <DropdownMenuRadioItem value="Community">
-                Community
+              <DropdownMenuRadioItem value="Community 👨‍👩‍👧‍👦">
+                Community 👨‍👩‍👧‍👦
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="Government">
-                Government
+              <DropdownMenuRadioItem value="Government 🧑‍⚖️ ">
+                Government 🧑‍⚖️
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="Factory">
-                Factory
+              <DropdownMenuRadioItem value="Factory 🏭">
+                Factory 🏭
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Toggle onClick={toggleTheme}>
+        {/* <Toggle onClick={toggleTheme}>
           {theme === "light" ? (
             <SunDim strokeWidth={1.75} />
           ) : (
             <Moon strokeWidth={1.75} />
           )}
-        </Toggle>
+        </Toggle> */}
       </section>
     </nav>
   );

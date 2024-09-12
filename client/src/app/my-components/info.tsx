@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Factory, Navigation } from "lucide-react";
+import { Factory, ChevronDown, ChevronUp } from "lucide-react";
 import { useGeneral } from "@/context/generalContext";
 
 export default function Info() {
@@ -14,7 +14,6 @@ export default function Info() {
     </section>
   );
 }
-
 function Profile() {
   return (
     <div className="flex flex-col">
@@ -41,6 +40,11 @@ function Profile() {
 
 function ListOfMines() {
   const { mineData } = useGeneral();
+  const [selectedMine, setSelectedMine] = useState<number | null>(null);
+
+  const toggleMineSelection = (id: number) => {
+    setSelectedMine(selectedMine === id ? null : id);
+  };
 
   return (
     <div className="flex flex-col">
@@ -49,7 +53,7 @@ function ListOfMines() {
         type="text"
         placeholder={`Search...`}
         className="p-3 border-2 border-gray-200 rounded-2xl my-2"
-      ></input>
+      />
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
           <h1 className="text-3xl font-semibold">{mineData.length}</h1>
@@ -67,18 +71,57 @@ function ListOfMines() {
       <section className="flex flex-col gap-2">
         {mineData.map((el) => (
           <div
-            className="flex flex-row gap-2 items-center border-2 py-5 px-4 rounded-xl justify-between"
             key={el.id}
+            className={`flex flex-col border-2 rounded-xl overflow-hidden transition-all duration-300 ease-in-out cursor-pointer
+                        ${
+                          selectedMine === el.id
+                            ? "ring-2 ring-[#6B8E23] shadow-lg"
+                            : ""
+                        }`}
+            onClick={() => toggleMineSelection(el.id)}
           >
-            <Factory size={28} color="#fda668" />
-            <div>
-              {" "}
-              <h1 className="text-xl font-semibold">{el.location}</h1>
-              <p className="text-gray-400">{el.type_of_mining}</p>
+            <div className="flex flex-row items-center py-5 px-3 justify-between gap-1">
+              <p className="text-gray-400">{el.id}</p>
+              <Factory size={28} color="#fda668" />
+              <div>
+                <h1 className="text-xl font-semibold">{el.location}</h1>
+                <p className="text-gray-400">{el.type_of_mining}</p>
+              </div>
+
+              {selectedMine === el.id ? (
+                <ChevronUp size={24} />
+              ) : (
+                <ChevronDown size={24} />
+              )}
             </div>
-            <div>
-              <Navigation size={28} color="#000000" />
-            </div>
+            {selectedMine === el.id && (
+              <div className="bg-gray-50 p-4 border-t">
+                <p>
+                  <strong>Tenure:</strong> {el.tenure} years
+                </p>
+                <p>
+                  <strong>Affect Radius:</strong> {el.affect_radius} km
+                </p>
+                <p>
+                  <strong>Water Quality:</strong> {el.water_quality}
+                </p>
+                <p>
+                  <strong>Air Quality:</strong> {el.air_quality}
+                </p>
+                <p>
+                  <strong>Soil Quality:</strong> {el.soil_quality}
+                </p>
+                <p>
+                  <strong>Biodiversity:</strong> {el.biodiversity}
+                </p>
+                <p>
+                  <strong>Socioeconomic Index:</strong> {el.socioeconomic_index}
+                </p>
+                <p>
+                  <strong>Description:</strong> {el.description}
+                </p>
+              </div>
+            )}
           </div>
         ))}
       </section>

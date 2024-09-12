@@ -55,11 +55,12 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
   };
 
   return (
-    <div className="flex flex-col h-full border-l-2 border-gray-200 justify-start p-5">
-      <div className="h-[600px] border-2 rounded-2xl flex flex-col bg-gray-50 shadow-lg">
+    <div className="flex flex-col h-full border-l-2 border-gray-200 justify-start p-3">
+      <div className="h-[400px] border-2 rounded-2xl flex flex-col bg-gray-50">
         <div className=" text-white p-4 rounded-t-2xl">
           <h2 className="text-xl text-[#88D66C] font-semibold flex items-center gap-2">
-            <Brain /> AI Assistant connected
+            <Brain />{" "}
+            <span className="text-[#FDA668]">AI Assistant connected</span>
           </h2>
         </div>
         <div className="flex-grow overflow-y-auto p-4 space-y-4">

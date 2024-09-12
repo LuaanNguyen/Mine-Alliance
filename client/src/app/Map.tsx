@@ -19,7 +19,8 @@ export default function Map() {
       <MapContainer
         center={[34.0489, -111.0937]}
         zoom={7}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true} // Changed this to true
+        style={{ height: "100%", width: "100%" }} // Added to ensure the map takes full height and width
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
