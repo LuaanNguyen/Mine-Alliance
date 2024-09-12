@@ -31,7 +31,9 @@ interface GeneralContextType {
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
 
-const serverURL = "http://54.245.158.146:5000"; // This is a development URL, change as the VPS
+const serverURL = process.env.BACKEND_URL;
+
+console.log(serverURL);
 
 const initialState: MineState[] = [];
 

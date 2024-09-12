@@ -23,7 +23,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch("http://54.245.158.146:5000/chatbot", {
+      const response = await fetch(`${process.env.BACKEND_URL}/chatbot`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
