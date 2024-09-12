@@ -53,7 +53,7 @@ function ListOfMines() {
       <input
         type="text"
         placeholder={`Search...`}
-        className="p-3 border-2 border-gray-200 rounded-2xl"
+        className="p-3 border-2 border-gray-200 bg-white rounded-2xl"
       />
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
