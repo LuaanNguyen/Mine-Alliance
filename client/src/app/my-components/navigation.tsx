@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { Pickaxe } from "lucide-react";
-import { Clock, Sun, Thermometer, SunDim, Moon } from "lucide-react";
+import { Clock, Sun, Thermometer } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useTheme } from "next-themes";
-import { Toggle } from "@/components/ui/toggle";
 
 import {
   DropdownMenu,
@@ -20,11 +18,6 @@ import {
 export default function Navigation() {
   const [time, setTime] = useState(getTime());
   const [position, setPosition] = React.useState("Community 👨‍👩‍👧‍👦");
-  const { theme, setTheme } = useTheme();
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
 
   useEffect(() => {
     const timer = setInterval(() => {
