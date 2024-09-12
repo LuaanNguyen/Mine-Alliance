@@ -52,7 +52,7 @@ function ListOfMines() {
       ></input>
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
-          <h1 className="text-3xl font-semibold">3</h1>
+          <h1 className="text-3xl font-semibold">{mineData.length}</h1>
           <h4>Total</h4>
         </div>
         <div className="flex-row">
