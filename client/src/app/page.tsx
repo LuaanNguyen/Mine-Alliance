@@ -25,7 +25,7 @@ export default function Home() {
           <main className="grid grid-cols-4 h-[92vh]">
             <Info />
             <Map />
-            <ChatBox mineId="mine123" />
+            <ChatBox />
           </main>
         </div>
       </GeneralProvider>

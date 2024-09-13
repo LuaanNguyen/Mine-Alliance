@@ -22,13 +22,14 @@ interface MineState {
   tenure: number;
   type_of_mining: string;
   water_quality: number;
+  selectedMineID: number;
 }
 
 interface GeneralContextType {
   mineData: MineState[];
   setMineData: React.Dispatch<React.SetStateAction<MineState[]>>;
-  selectedMine: number | null;
-  setSelectedMine: React.Dispatch<React.SetStateAction<number | null>>;
+  selectedMineID: number | null;
+  setSelectedMineID: React.Dispatch<React.SetStateAction<number | null>>;
   toggleMineSelection: (id: number) => void;
 }
 
@@ -44,10 +45,10 @@ interface GeneralProviderProps {
 
 function GeneralProvider({ children }: GeneralProviderProps) {
   const [mineData, setMineData] = useState<MineState[]>(initialState);
-  const [selectedMine, setSelectedMine] = useState<number | null>(null);
+  const [selectedMineID, setSelectedMineID] = useState<number | null>(null);
 
   const toggleMineSelection = (id: number) => {
-    setSelectedMine(selectedMine === id ? null : id);
+    setSelectedMineID(selectedMineID === id ? null : id);
   };
 
   useEffect(() => {
@@ -68,8 +69,8 @@ function GeneralProvider({ children }: GeneralProviderProps) {
       value={{
         mineData,
         setMineData,
-        selectedMine,
-        setSelectedMine,
+        selectedMineID,
+        setSelectedMineID,
         toggleMineSelection,
       }}
     >

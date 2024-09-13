@@ -39,7 +39,7 @@ function Profile() {
 }
 
 function ListOfMines() {
-  const { mineData, selectedMine, toggleMineSelection } = useGeneral();
+  const { mineData, selectedMineID, toggleMineSelection } = useGeneral();
 
   return (
     <div className="flex flex-col">
@@ -72,7 +72,7 @@ function ListOfMines() {
               key={el.id}
               className={`flex flex-col border-2 rounded-xl transition-all duration-300 ease-in-out cursor-pointer
                         ${
-                          selectedMine === el.id
+                          selectedMineID === el.id
                             ? "ring-2 ring-[#6B8E23] shadow-lg"
                             : ""
                         }`}
@@ -86,13 +86,13 @@ function ListOfMines() {
                   <p className="text-gray-400">{el.type_of_mining}</p>
                 </div>
 
-                {selectedMine === el.id ? (
+                {selectedMineID === el.id ? (
                   <ChevronUp size={24} />
                 ) : (
                   <ChevronDown size={24} />
                 )}
               </div>
-              {selectedMine === el.id && (
+              {selectedMineID === el.id && (
                 <div className="bg-gray-50 p-4 border-t text-sm">
                   <p>
                     <strong>Tenure:</strong> {el.tenure} years
