@@ -8,7 +8,7 @@ const Map = dynamic(() => import("./Map"), {
 });
 
 import Info from "./my-components/info";
-import { GeneralProvider } from "@/context/generalContext";
+
 import ChatBox from "./my-components/chatbox";
 
 const MapLoadingSpinner = () => (
@@ -20,15 +20,13 @@ const MapLoadingSpinner = () => (
 export default function Home() {
   return (
     <>
-      <GeneralProvider>
-        <div className="flex">
-          <main className="grid grid-cols-4 h-[92vh]">
-            <Info />
-            <Map />
-            <ChatBox />
-          </main>
-        </div>
-      </GeneralProvider>
+      <div className="flex">
+        <main className="grid grid-cols-4 h-[92vh]">
+          <Info />
+          <Map />
+          <ChatBox />
+        </main>
+      </div>
     </>
   );
 }

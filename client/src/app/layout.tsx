@@ -4,6 +4,7 @@ import "./globals.css";
 import Navigation from "./my-components/navigation";
 import Sidebar from "./my-components/sidebar";
 import Footer from "./my-components/footer";
+import { GeneralProvider } from "@/context/generalContext";
 
 export const metadata: Metadata = {
   title: "Mine Alliance",
@@ -20,19 +21,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Sidebar />
-          <main className="w-[100%]">
-            <Navigation />
-            {children}
-            <Footer />
-          </main>
-        </ThemeProvider>
+        <GeneralProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Sidebar />
+            <main className="w-[100%]">
+              <Navigation />
+              {children}
+              <Footer />
+            </main>
+          </ThemeProvider>
+        </GeneralProvider>
       </body>
     </html>
   );

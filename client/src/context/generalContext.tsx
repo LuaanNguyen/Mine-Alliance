@@ -31,6 +31,10 @@ interface GeneralContextType {
   selectedMineID: number | null;
   setSelectedMineID: React.Dispatch<React.SetStateAction<number | null>>;
   toggleMineSelection: (id: number) => void;
+  position: string;
+  setPosition: React.Dispatch<React.SetStateAction<string>>;
+  numFeedback: number;
+  setNumFeedback: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
@@ -46,6 +50,8 @@ interface GeneralProviderProps {
 function GeneralProvider({ children }: GeneralProviderProps) {
   const [mineData, setMineData] = useState<MineState[]>(initialState);
   const [selectedMineID, setSelectedMineID] = useState<number | null>(null);
+  const [position, setPosition] = useState<string>("Community 👨‍👩‍👧‍👦");
+  const [numFeedback, setNumFeedback] = useState(0);
 
   const toggleMineSelection = (id: number) => {
     setSelectedMineID(selectedMineID === id ? null : id);
@@ -72,6 +78,10 @@ function GeneralProvider({ children }: GeneralProviderProps) {
         selectedMineID,
         setSelectedMineID,
         toggleMineSelection,
+        position,
+        setPosition,
+        numFeedback,
+        setNumFeedback,
       }}
     >
       {children}

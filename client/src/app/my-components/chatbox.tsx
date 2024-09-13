@@ -9,8 +9,9 @@ const ChatBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
+
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const { mineData, selectedMineID } = useGeneral();
+  const { mineData, selectedMineID, setNumFeedback } = useGeneral();
   const selectedMine = mineData.find((mine) => mine.id === selectedMineID);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const ChatBox = () => {
   const handleRatingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(`Submitted rating: ${rating}, feedback: ${feedback}`);
+    setNumFeedback((prev) => prev + 1);
     // Here you would typically send this data to your backend
     setRating(0);
     setFeedback("");
@@ -32,14 +34,14 @@ const ChatBox = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${process.env.BACKEND_URL}/chatbot`, {
+      const response = await fetch(`http://127.0.0.1:5000/chatbot`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           question: message,
-          mineId: selectedMine?.id,
+          mine_name: selectedMine,
         }),
       });
 
@@ -52,7 +54,7 @@ const ChatBox = () => {
       setChatHistory((prevHistory) => [
         ...prevHistory,
         `You: ${message}`,
-        `Bot: ${data.response}`,
+        `🤖: ${data.response}`,
       ]);
       setMessage("");
     } catch (error) {
@@ -81,7 +83,7 @@ const ChatBox = () => {
               }`}
             >
               <div
-                className={`max-w-[70%] px-4 py-2 rounded-lg ${
+                className={`max-w-[70%] px-4 py-2 text-sm rounded-lg ${
                   msg.startsWith("You:")
                     ? "bg-[#FDA668] text-white"
                     : "bg-white text-gray-800 border border-gray-300"
@@ -104,7 +106,7 @@ const ChatBox = () => {
               placeholder={`Ask about mining quality ${
                 selectedMine ? `at ` + selectedMine.location : ""
               }...`}
-              className="flex-grow bg-white text-[10px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDA668]"
+              className="flex-grow bg-white text-[10px] px-2 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDA668]"
               disabled={isLoading}
             />
             <button
@@ -149,17 +151,19 @@ const ChatBox = () => {
               </label>
               <textarea
                 value={feedback}
-                onChange={(e) => setFeedback(e.target.value)}
-                className="w-full px-3 py-2 bg-white text-gray-700 border rounded-lg focus:outline-none"
+                onChange={(e) => {
+                  setFeedback(e.target.value);
+                }}
+                className="w-full text-sm px-3 py-2 bg-white text-gray-700 border rounded-lg focus:outline-none"
                 rows={3}
-                placeholder="Please share your thoughts..."
+                placeholder="Please share your issues"
               ></textarea>
             </div>
             <button
               type="submit"
               className="bg-[#88D66C] text-white font-bold py-2 px-4 rounded hover:bg-[#B4E380] focus:outline-none focus:shadow-outline"
             >
-              Submit Feedback
+              Submit Issue
             </button>
           </form>
         </div>

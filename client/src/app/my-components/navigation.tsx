@@ -14,10 +14,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useGeneral } from "@/context/generalContext";
 
 export default function Navigation() {
   const [time, setTime] = useState(getTime());
-  const [position, setPosition] = React.useState("Community 👨‍👩‍👧‍👦");
+  const { position, setPosition } = useGeneral();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,7 +50,7 @@ export default function Navigation() {
         </div>
         <div className="flex gap-1">
           <Thermometer />
-          130°F
+          109°F
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
