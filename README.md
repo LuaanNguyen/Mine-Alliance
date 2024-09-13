@@ -6,7 +6,7 @@ Live Demo: [Mine Alliance](http://54.245.158.146:3000/)
 
 ## Inspiration ✨
 
-Enter text here
+test
 
 ## What it does ⛏️
 
