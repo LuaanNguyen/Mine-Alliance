@@ -148,7 +148,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
             <textarea
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-              className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+              className="w-full px-3 py-2 bg-white text-gray-700 border rounded-lg focus:outline-none"
               rows={3}
               placeholder="Please share your thoughts..."
             ></textarea>
