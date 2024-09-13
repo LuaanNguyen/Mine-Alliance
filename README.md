@@ -6,11 +6,11 @@ Live Demo: [Mine Alliance](http://54.245.158.146:3000/)
 
 ## Inspiration ✨
 
-Once we saw the data showing that the majority of mining sites are on Indigenous land, some of it sacred land, and that the local communities had no power to raise objections or even aquire information on the mines affecting their area. We felt motivated to give local communities the power of free information and a voice that was on equal footing with major mining companies and state and federal regulators, so that they could be a part in the process of mining minerals that are essential to human society.
+Once we learned that the majority of mining sites were on Indigenous land, some of it sacred land, and that the local communities had no power to raise objections or even to aquire information on the mines affecting their area. We felt motivated to give local communities the power of free information and a voice that was on equal footing with major mining companies and state and federal regulators, so that they could be a part in the process of mining minerals that are essential to human society.
 
 ## What it does ⛏️
 
-Enter text here
+Our website allows the three major stakeholders to log-in either as a community member, mining site representative, or government regulator. Where then, the individual can see information on nearby active mines including tenure; effect radius of the mine; water, soil, and air quality; biodiversity impact; socioeconomic impact; and a description of the mine. Depending on who's logged-in different options will be available. Community members can submit issues that they find with specific mining sites, whether it is an ecological issue or a disruption to sacred lands. Government regulators can submit new site specific regulations, giving a title to the new regulation and a description of the regulation. Mining site representatives can respond to feedback given on their mining sites and submit announcements that can be seen by everyone.
 
 ## How we build it 👷
 
