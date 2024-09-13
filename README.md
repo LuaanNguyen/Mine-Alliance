@@ -6,7 +6,7 @@ Live Demo: [Mine Alliance](http://54.245.158.146:3000/)
 
 ## Inspiration ✨
 
-test
+Once we saw the data showing that the majority of mining sites are on Indigenous land, some of it sacred land, and that the local communities had no power to raise objections or even aquire information on the mines affecting their area. We felt motivated to give local communities the power of free information and a voice that was on equal footing with major mining companies and state and federal regulators, so that they could be a part in the process of mining minerals that are essential to human society.
 
 ## What it does ⛏️
 
