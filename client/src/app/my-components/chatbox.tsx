@@ -103,7 +103,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Ask about mining quality..."
-              className="flex-grow bg-white  px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDA668]"
+              className="flex-grow bg-white text-sm px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FDA668]"
               disabled={isLoading}
             />
             <button
