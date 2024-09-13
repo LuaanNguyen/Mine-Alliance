@@ -4,14 +4,18 @@ import dynamic from "next/dynamic";
 
 const Map = dynamic(() => import("./Map"), {
   ssr: false,
-  loading: () => (
-    <div className="relative  mx-auto my-auto inset-0 w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#6B8E23] border-t-transparent"></div>
-  ),
+  loading: () => <MapLoadingSpinner />,
 });
 
 import Info from "./my-components/info";
 import { GeneralProvider } from "@/context/generalContext";
 import ChatBox from "./my-components/chatbox";
+
+const MapLoadingSpinner = () => (
+  <div className="col-span-2 flex items-center justify-center bg-gray-100">
+    <div className="relative w-16 h-16 rounded-full animate-spin border-8 border-dashed border-[#88D66C] border-t-transparent"></div>
+  </div>
+);
 
 export default function Home() {
   return (
