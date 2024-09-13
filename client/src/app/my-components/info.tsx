@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Factory, ChevronDown, ChevronUp } from "lucide-react";
@@ -39,12 +39,7 @@ function Profile() {
 }
 
 function ListOfMines() {
-  const { mineData } = useGeneral();
-  const [selectedMine, setSelectedMine] = useState<number | null>(null);
-
-  const toggleMineSelection = (id: number) => {
-    setSelectedMine(selectedMine === id ? null : id);
-  };
+  const { mineData, selectedMine, toggleMineSelection } = useGeneral();
 
   return (
     <div className="flex flex-col">

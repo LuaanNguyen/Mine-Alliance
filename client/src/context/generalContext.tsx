@@ -27,13 +27,14 @@ interface MineState {
 interface GeneralContextType {
   mineData: MineState[];
   setMineData: React.Dispatch<React.SetStateAction<MineState[]>>;
+  selectedMine: number | null;
+  setSelectedMine: React.Dispatch<React.SetStateAction<number | null>>;
+  toggleMineSelection: (id: number) => void;
 }
 
 const GeneralContext = createContext<GeneralContextType | undefined>(undefined);
 
 const serverURL = process.env.BACKEND_URL;
-
-console.log(serverURL);
 
 const initialState: MineState[] = [];
 
@@ -43,6 +44,11 @@ interface GeneralProviderProps {
 
 function GeneralProvider({ children }: GeneralProviderProps) {
   const [mineData, setMineData] = useState<MineState[]>(initialState);
+  const [selectedMine, setSelectedMine] = useState<number | null>(null);
+
+  const toggleMineSelection = (id: number) => {
+    setSelectedMine(selectedMine === id ? null : id);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -58,7 +64,15 @@ function GeneralProvider({ children }: GeneralProviderProps) {
   }, []);
 
   return (
-    <GeneralContext.Provider value={{ mineData, setMineData }}>
+    <GeneralContext.Provider
+      value={{
+        mineData,
+        setMineData,
+        selectedMine,
+        setSelectedMine,
+        toggleMineSelection,
+      }}
+    >
       {children}
     </GeneralContext.Provider>
   );
