@@ -54,7 +54,7 @@ export default function Navigation() {
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline">Login in as {position}</Button>
+            <Button variant="outline">Logged in as {position}</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Choose the Users to Login</DropdownMenuLabel>

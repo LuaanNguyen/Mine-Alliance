@@ -66,7 +66,60 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="flex flex-col  border-l-2 border-gray-200 justify-start p-3 overflow-y-auto">
+    <div className="flex flex-col  border-l-2 border-gray-200 justify-between p-3 overflow-y-auto justify-">
+      {/* Feedback */}
+      {selectedMine ? (
+        <div className="flex flex-col">
+          <form
+            onSubmit={handleRatingSubmit}
+            className="bg-white p-4 rounded-2xl "
+          >
+            <div className="mb-4">
+              <label className="block text-gray-700 text-md font-semibold mb-2">
+                Rate your experience at {selectedMine.location}
+              </label>
+              <div className="flex">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    size={24}
+                    onClick={() => setRating(star)}
+                    className={`cursor-pointer ${
+                      star <= rating
+                        ? "text-yellow-400 fill-current"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Your feedback:
+              </label>
+              <textarea
+                value={feedback}
+                onChange={(e) => {
+                  setFeedback(e.target.value);
+                }}
+                className="w-full text-sm px-3 py-2 bg-white text-gray-700 border rounded-lg focus:outline-none"
+                rows={3}
+                placeholder="Please share your issues"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="bg-[#88D66C] text-white font-bold py-2 px-4 rounded hover:bg-[#B4E380] focus:outline-none focus:shadow-outline"
+            >
+              Submit Issue
+            </button>
+          </form>
+        </div>
+      ) : (
+        <></>
+      )}
+
+      {/* Chatbot */}
       <div className="flex flex-col h-[400px] border-2 rounded-2xl mb-4">
         <div className="p-4 rounded-t-2xl">
           <h2 className="text-xl text-[#88D66C] font-semibold flex items-center gap-2">
@@ -119,57 +172,6 @@ const ChatBox = () => {
           </div>
         </form>
       </div>
-
-      {selectedMine ? (
-        <div className="flex flex-col">
-          <form
-            onSubmit={handleRatingSubmit}
-            className="bg-white p-4 rounded-2xl "
-          >
-            <div className="mb-4">
-              <label className="block text-gray-700 text-md font-semibold mb-2">
-                Rate your experience at {selectedMine.location}
-              </label>
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    size={24}
-                    onClick={() => setRating(star)}
-                    className={`cursor-pointer ${
-                      star <= rating
-                        ? "text-yellow-400 fill-current"
-                        : "text-gray-300"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Your feedback:
-              </label>
-              <textarea
-                value={feedback}
-                onChange={(e) => {
-                  setFeedback(e.target.value);
-                }}
-                className="w-full text-sm px-3 py-2 bg-white text-gray-700 border rounded-lg focus:outline-none"
-                rows={3}
-                placeholder="Please share your issues"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="bg-[#88D66C] text-white font-bold py-2 px-4 rounded hover:bg-[#B4E380] focus:outline-none focus:shadow-outline"
-            >
-              Submit Issue
-            </button>
-          </form>
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 };

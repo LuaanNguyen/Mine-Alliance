@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Factory, ChevronDown, ChevronUp } from "lucide-react";
 import { useGeneral } from "@/context/generalContext";
 
@@ -16,19 +16,27 @@ export default function Info() {
 function ListOfMines() {
   const { mineData, selectedMineID, toggleMineSelection, numFeedback } =
     useGeneral();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredMines = mineData.filter(
+    (mine) =>
+      mine.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      mine.type_of_mining.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="flex flex-col">
-      {" "}
       <h1 className="text-xl font-semibold my-1">Nearby Active Mines</h1>
       <input
         type="text"
         placeholder={`Search...`}
         className="p-3 border-2 border-gray-200 bg-white rounded-2xl"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
       />
       <div className="flex flex-row justify-between p-4">
         <div className="flex-row">
-          <h1 className="text-3xl font-semibold">{mineData.length}</h1>
+          <h1 className="text-3xl font-semibold">{filteredMines.length}</h1>
           <h4>Total</h4>
         </div>
         <div className="flex-row">
@@ -41,9 +49,8 @@ function ListOfMines() {
         </div>
       </div>
       <section className="flex flex-col gap-2 flex-1">
-        {" "}
-        {mineData.length > 0 ? (
-          mineData.map((el) => (
+        {filteredMines.length > 0 ? (
+          filteredMines.map((el) => (
             <div
               key={el.id}
               className={`flex flex-col border-2 rounded-xl transition-all duration-300 ease-in-out cursor-pointer
@@ -100,7 +107,9 @@ function ListOfMines() {
             </div>
           ))
         ) : (
-          <div className="text-center text-2xl my-20">No Data Available 🥲</div>
+          <div className="text-center text-xl my-20">
+            No matching mines found 🥲
+          </div>
         )}
       </section>
     </div>
