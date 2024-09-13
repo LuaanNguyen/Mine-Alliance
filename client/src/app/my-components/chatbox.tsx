@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Brain } from "lucide-react";
+import { Brain, Star } from "lucide-react";
 
 interface ChatBoxProps {
   mineId: string;
@@ -10,11 +10,21 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
   const [chatHistory, setChatHistory] = useState<string[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [feedback, setFeedback] = useState("");
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory]);
+
+  const handleRatingSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(`Submitted rating: ${rating}, feedback: ${feedback}`);
+    // Here you would typically send this data to your backend
+    setRating(0);
+    setFeedback("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,8 +65,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
   };
 
   return (
-    <div className="flex flex-col  border-l-2 border-gray-200 justify-start p-3">
-      <div className="flex flex-col h-[400px] border-2 rounded-2xl bg-gray-50">
+    <div className="flex flex-col  border-l-2 border-gray-200 justify-start p-3 overflow-y-auto">
+      <div className="flex flex-col h-[400px] border-2 rounded-2xl mb-4">
         <div className="p-4 rounded-t-2xl">
           <h2 className="text-xl text-[#88D66C] font-semibold flex items-center gap-2">
             <Brain />{" "}
@@ -104,6 +114,51 @@ const ChatBox: React.FC<ChatBoxProps> = ({ mineId }) => {
               {isLoading ? "Sending..." : "Send"}
             </button>
           </div>
+        </form>
+      </div>
+
+      <div className="flex flex-col">
+        <form
+          onSubmit={handleRatingSubmit}
+          className="bg-white p-4 rounded-2xl "
+        >
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Rate your experience at Moreci Mine:
+            </label>
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
+                <Star
+                  key={star}
+                  size={24}
+                  onClick={() => setRating(star)}
+                  className={`cursor-pointer ${
+                    star <= rating
+                      ? "text-yellow-400 fill-current"
+                      : "text-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Your feedback:
+            </label>
+            <textarea
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+              className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
+              rows={3}
+              placeholder="Please share your thoughts..."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="bg-[#88D66C] text-white font-bold py-2 px-4 rounded hover:bg-[#B4E380] focus:outline-none focus:shadow-outline"
+          >
+            Submit Feedback
+          </button>
         </form>
       </div>
     </div>
