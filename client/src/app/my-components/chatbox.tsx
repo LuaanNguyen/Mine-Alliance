@@ -4,7 +4,9 @@ import { useGeneral } from "@/context/generalContext";
 
 const ChatBox = () => {
   const [message, setMessage] = useState("");
-  const [chatHistory, setChatHistory] = useState<string[]>([]);
+  const [chatHistory, setChatHistory] = useState<string[]>([
+    "🤖: Hello, how can I help you with?",
+  ]);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
@@ -18,6 +20,10 @@ const ChatBox = () => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatHistory]);
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []); // Scroll to bottom on initial render
+
   const handleRatingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(`Submitted rating: ${rating}, feedback: ${feedback}`);
@@ -25,6 +31,7 @@ const ChatBox = () => {
     // Here you would typically send this data to your backend
     setRating(0);
     setFeedback("");
+    window.alert("Feedback Submitted");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -34,7 +41,7 @@ const ChatBox = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/chatbot`, {
+      const response = await fetch(`${process.env.BACKEND_URL}/chatbot`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +73,7 @@ const ChatBox = () => {
   };
 
   return (
-    <div className="flex flex-col  border-l-2 border-gray-200 justify-between p-3 overflow-y-auto justify-">
+    <div className="flex flex-col border-l-2 border-gray-200 justify-between p-3 overflow-y-auto justify-">
       {/* Feedback */}
       {selectedMine ? (
         <div className="flex flex-col">
@@ -175,10 +182,11 @@ const ChatBox = () => {
     </div>
   );
 };
+
 export default ChatBox;
 
 const LoadingSpinner: React.FC = () => (
   <div className="flex justify-center items-center">
-    <div className="relative  mx-auto my-auto inset-0 w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#88D66C] border-t-transparent"></div>
+    <div className="relative mx-auto my-auto inset-0 w-12 h-12 rounded-full animate-spin border-8 border-dashed border-[#88D66C] border-t-transparent"></div>
   </div>
 );
