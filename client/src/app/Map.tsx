@@ -17,7 +17,7 @@ function ChangeMapView({ coords }: { coords: [number, number] }) {
 }
 
 export default function Map() {
-  const { mineData, selectedMineID } = useGeneral();
+  const { mineData, selectedMineID, toggleMineSelection } = useGeneral();
 
   function parseCoords(coords: string): [number, number] {
     const [lat, lng] = coords.split(",").map((coord) => parseFloat(coord));
@@ -47,6 +47,9 @@ export default function Map() {
             position={parseCoords(el.location_coords)}
             key={el.id}
             icon={el.id === selectedMineID ? highlightedIcon : defaultIcon}
+            eventHandlers={{
+              click: () => toggleMineSelection(el.id),
+            }}
           >
             <Popup>{el.location}</Popup>
           </Marker>
