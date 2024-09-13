@@ -11,9 +11,8 @@ const ChatBox = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [rating, setRating] = useState(0);
   const [feedback, setFeedback] = useState("");
-
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const { mineData, selectedMineID, setNumFeedback } = useGeneral();
+  const { mineData, selectedMineID, setNumFeedback, position } = useGeneral();
   const selectedMine = mineData.find((mine) => mine.id === selectedMineID);
 
   useEffect(() => {
@@ -72,6 +71,8 @@ const ChatBox = () => {
     }
   };
 
+  console.log(position);
+
   return (
     <div className="flex flex-col border-l-2 border-gray-200 justify-between p-3 overflow-y-auto justify-">
       {/* Feedback */}
@@ -83,26 +84,35 @@ const ChatBox = () => {
           >
             <div className="mb-4">
               <label className="block text-gray-700 text-md font-semibold mb-2">
-                Rate your experience at {selectedMine.location}
+                {position === "Community 👨‍👩‍👧‍👦" &&
+                  `⭐️ Rate your experience at ${selectedMine.location}`}
+                {position === "Government 🧑‍⚖️" &&
+                  `🚧 Announce a Regulation at ${selectedMine.location}`}
+                {position === "Mining Site Representative 🏭" &&
+                  `🧑‍🔧 Resolve an Issue at ${selectedMine.location}`}
               </label>
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    size={24}
-                    onClick={() => setRating(star)}
-                    className={`cursor-pointer ${
-                      star <= rating
-                        ? "text-yellow-400 fill-current"
-                        : "text-gray-300"
-                    }`}
-                  />
-                ))}
-              </div>
+              {position === "Community 👨‍👩‍👧‍👦" && (
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      size={24}
+                      onClick={() => setRating(star)}
+                      className={`cursor-pointer ${
+                        star <= rating
+                          ? "text-yellow-400 fill-current"
+                          : "text-gray-300"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
-                Your feedback:
+                {position === "Community 👨‍👩‍👧‍👦" && `Your Feedback`}
+                {position === "Government 🧑‍⚖️" && `Regulation title:`}
+                {position === "Mining Site Representative 🏭" && `Description`}
               </label>
               <textarea
                 value={feedback}
@@ -118,7 +128,10 @@ const ChatBox = () => {
               type="submit"
               className="bg-[#88D66C] text-white font-bold py-2 px-4 rounded hover:bg-[#B4E380] focus:outline-none focus:shadow-outline"
             >
-              Submit Issue
+              {position === "Community 👨‍👩‍👧‍👦" && `Submit Issue`}
+              {position === "Government 🧑‍⚖️" && `Announce a Regulation`}
+              {position === "Mining Site Representative 🏭" &&
+                `Resolve an Issue`}
             </button>
           </form>
         </div>

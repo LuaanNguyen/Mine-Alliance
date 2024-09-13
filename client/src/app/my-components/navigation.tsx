@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Pickaxe } from "lucide-react";
-import { Clock, Sun, Thermometer } from "lucide-react";
+import { Clock, Sun, Thermometer, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -41,6 +41,10 @@ export default function Navigation() {
       </a>
       <section className="flex gap-5 p-4 items-center">
         <div className="flex gap-1">
+          <Bell /> 7
+        </div>
+
+        <div className="flex gap-1">
           <Clock />
           {time}
         </div>
@@ -66,11 +70,11 @@ export default function Navigation() {
               <DropdownMenuRadioItem value="Community 👨‍👩‍👧‍👦">
                 Community 👨‍👩‍👧‍👦
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="Government 🧑‍⚖️ ">
+              <DropdownMenuRadioItem value="Government 🧑‍⚖️">
                 Government 🧑‍⚖️
               </DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="Factory 🏭">
-                Factory 🏭
+              <DropdownMenuRadioItem value="Mining Site Representative 🏭">
+                Mining Site Representative 🏭
               </DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuContent>
