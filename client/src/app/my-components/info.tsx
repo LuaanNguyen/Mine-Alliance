@@ -56,7 +56,7 @@ function ListOfMines() {
               className={`flex flex-col border-2 rounded-xl transition-all duration-300 ease-in-out cursor-pointer
                         ${
                           selectedMineID === el.id
-                            ? "ring-2 ring-[#6B8E23] shadow-lg"
+                            ? "ring-2 ring-[#87CEEB] shadow-lg"
                             : ""
                         }`}
               onClick={() => toggleMineSelection(el.id)}
