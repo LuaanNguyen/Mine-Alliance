@@ -37,7 +37,7 @@ Enter text here
 
 ## Accomplishments that we're proud of 👍
 
-Enter text here
+We spent a lot of time researching what specific information to show that would be relevant for our stakeholders and what goes into creating an impact assessment.
 
 ## What we learned 📕
 
