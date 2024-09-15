@@ -61,7 +61,7 @@ Make sure you have latest `NodeJS`, `Pip`, `npm`, and `Python` installed.
 > cd client
 > npm i #install all dependencies if this is the first time you are doing this
 > npm ci (optional)
-> npm run dev (for production)
+> npm run build (for production)
 > npm run dev
 ```
 
