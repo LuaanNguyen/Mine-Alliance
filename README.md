@@ -26,27 +26,65 @@ Our website allows the three major stakeholders to log-in either as a community 
 - `Framermotion` for smooth, modern website animations
 - `Leaflet` for interactive map and geospatial visualizations
 - `Vercel` for seamless deployment and front-end hosting
+- `Lucide` for modern icons
 
 ### Back-end & DevOps
 
 - `Flask` for handling HTTP requests and API development
 - `SQLAlchemy` for robust database management and ORM
 - `AWS EC2` for scalable and flexible cloud computing infrastructure
-- `Amazon SageMaker` for builidng, training, and deploying geologically intelligent model
+- `Amazon SageMaker Studio` for builidng, training, and deploying geologically intelligent model
 - `ChatGPT-4` API intergration for advanced NLP
 
 ## Challenges we ran into 🚒
 
-Enter text here
+- Collecting enough data: Some mining data were confidential to the public.
+- Communication Issue between members: this is our first hackathon together.
+- AWS Credit Time limit: We weren't able to fully fine-tune our own AI model due to a limited AWS credit.
+- Cross-origin hosting: While hosting both client and server on AWS EC2, we ran into the deployment problem due to hosts unable to recognize/ fetch data on the same origin. It turned out to be NextJS environment variables' imcompatibility with AWS hosting.
 
 ## Accomplishments that we're proud of 👍
 
 We spent a lot of time researching what specific information to show that would be relevant for our stakeholders and what goes into creating an impact assessment.
 
-## What we learned 📕
+## How to run the program 💻
 
-Enter text here
+Make sure you have latest `NodeJS`, `Pip`, `npm`, and `Python` installed.
 
-## What's Next 🚀
+### Client - `Running on http://127.0.0.1:3000`
 
-Enter text here
+```shell
+> cd client
+> npm i #install all dependencies if this is the first time you are doing this
+> npm ci (optional)
+> npm run dev (for production)
+> npm run dev
+```
+
+### Server - `Running on http://127.0.0.1:5000`
+
+```shell
+> cd server
+> python3 -m venv venv
+> source venv/bin/activate
+> pip install  -r requirements.txt
+> python3 db_init.py (If you don't have the data already)
+> python3 app.py
+```
+
+### Envrionments variables 🤐
+
+Create a .env files in both `client` and `server`
+
+In Client, you need Stadia Map's API key and backend url depending on your production needs:
+
+- `STADIA_MAPS_API_KEY=YOUR_KEY`
+- `BACKEND_URL=YOUR_HOST`
+
+In Server, you need OpenAI's API:
+
+- `OPENAI_API_KEY=`YOUR_KEY
+
+# 🪪 License
+
+`Mine Alliance` is licensed under MIT License. All development is currently maintain by [Luan Nguyen](https://github.com/LuaanNguyen).
