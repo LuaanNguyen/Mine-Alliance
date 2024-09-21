@@ -30,8 +30,10 @@ export default function Map() {
     ? parseCoords(selectedMine.location_coords)
     : defaultCenter;
 
+  console.log(selectedMineID);
+
   return (
-    <section className="grid col-span-2 h-[100%]">
+    <section className="relative grid col-span-2 h-full">
       <MapContainer
         center={center}
         zoom={7}
