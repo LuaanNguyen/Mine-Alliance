@@ -5,7 +5,7 @@ An innovative, AI-driven application designed to unite stakeholders across Arizo
 <!-- Live Demo: [Mine Alliance](http://54.245.158.146:3000/) -->
 - Demo: [Youtube](https://www.youtube.com/watch?v=7ei89DcPWfY)
 - Wireframe: [Figma](https://www.figma.com/proto/8R9e3nz8XQjVrb684ZGR8j/AZ-AI-Sustainability-Hack?node-id=0-1&t=5BL2uzE0XvacWGkw-1)
-- DevPost: `Coming soon`
+- DevPost: [DEVPOST](https://devpost.com/software/mine-alliance#updates)
 - Vercel: [Static Deployment](https://sustainable-az-spark-challenge-g3sayr8rs-luaannguyens-projects.vercel.app/)
 
 ![Mine Alliance](MineAlliance.png)
