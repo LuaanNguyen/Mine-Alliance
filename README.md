@@ -24,7 +24,7 @@ Our website allows the three major stakeholders to log-in either as a community 
 
 ### Front-end
 
-- `NextJS` for SEO optimization and server-side rendering
+- `NextJS` for SEO optimization and server-side rendering.
 - `TailwindCSS` for utility-first styling
 - `Shadcn` for modern UI components and design system
 - `Framermotion` for smooth, modern website animations
